@@ -15,6 +15,7 @@
 #   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import argparse
+import time
 from generate import generate_txt2img_dataset, generate_img2img_dataset, generate_inpaint_dataset
 
 if __name__ == "__main__":
@@ -24,9 +25,16 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    starttime = time.time()
+
     if args.mode == 'txt2img':
         generate_txt2img_dataset(args.config)
     elif args.mode == 'img2img':
         generate_img2img_dataset(args.config)
     elif args.mode == 'inpaint':
         generate_inpaint_dataset(args.config)
+
+    elapsed_time = time.time() - starttime
+    hours, rem = divmod(elapsed_time, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print(" === finished in {:0>2}:{:0>2}:{:05.2f} ===".format(int(hours),int(minutes),seconds))
