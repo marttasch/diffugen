@@ -1,21 +1,17 @@
 {
-    "dataset_name": "urinal_with_TI_1",
+    "dataset_name": "urinal_loraRealVis-60_v2-1",
     "dataset_root": "datasets_output",
     "image_format": "png",
     "image_size": {"width": 512, "height": 512},
     "steps": 50,
-    "dataset_classes": ["pissoir_clean", "pissoir_average", "pissoir_dirty"],
-    "dataset_to_model_class_map": {"pissoir_clean": "toilet", "pissoir_average": "toilet", "pissoir_dirty": "toilet"},
+    "dataset_classes": ["pissoir_dirty"],
+    "dataset_to_model_class_map": {"pissoir_clean": "toilet"},
     "label_model": {"type": "YOLOSeg", "weights": "models/seg/yolov8l-seg.pt", "classes": "models/seg/yolov8-classes.txt"},
     "unsupervised": true,
     "deterministic": true,
     "images_per_shard": 500,
-    "textual_inversion": {
-        "weights":"models/sd/embeddings/urinal-embedding-SDv15_v4-500-2500.pt",
-        "keyword": "<urinalEmbedding>"
-    },
     "txt2img": {
-        "stable_diffusion_model": "SG161222/Realistic_Vision_V5.1_noVAE",
+        "stable_diffusion_model": "./models/sd/Realistic_Vision",
         "seed_range": {"min":9092091, "max":9982091},
         "seed_count_per_prompt": 1,
         "object_names": ["urinal"],
@@ -24,9 +20,7 @@
         "sky_conditions": ["clear"],
         "weather_conditions": ["dry"],
         "prompts": [
-            "a photo of a {object_name} <urinalEmbedding>++ mounted on a wall in a bathroom. clean condition. {view_point} view",
-            "a photo of a {object_name} <urinalEmbedding>++ mounted on a wall in a bathroom. average condition. {view_point} view",
-            "a photo of a {object_name} <urinalEmbedding>++ mounted on a wall in a bathroom. in dirty condition. {view_point} view"
+            "a white {object_name} in a tiled bathroom, ultra realistic, dirty++"
         ],
         "negative_prompt": "(deformed toilet, deformed urinal, broken toilet, broken urinal)"
     }
